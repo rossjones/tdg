@@ -1,0 +1,28 @@
+{
+  "rows": 100,
+  "columns": [
+    {
+      "name": "provider",
+      "type": "words",
+      "args": {
+        "count": 4
+      }
+    },
+    {
+      "name": "amount",
+      "type": "float",
+      "args": {
+        "min": 10.00,
+        "max": 500.00
+      }
+    },
+    {
+      "name": "count",
+      "type": "integer",
+      "args": {
+        "min": 5,
+        "max": 1010
+      }
+  }
+  ]
+}
