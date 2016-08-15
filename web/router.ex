@@ -5,8 +5,6 @@ defmodule TDG.Router do
     plug :accepts, ["html"]
     plug :fetch_session
     plug :fetch_flash
-    #plug :protect_from_forgery
-    #plug :put_secure_browser_headers
   end
 
   pipeline :api do
@@ -16,7 +14,8 @@ defmodule TDG.Router do
   scope "/", TDG do
     pipe_through :browser # Use the default browser stack
 
-    post "/generate", GeneratorController, :generate
+    resources "/sessions", SessionController
+    get "/generate/:name", GeneratorController, :generate
     get "/", PageController, :index
   end
 

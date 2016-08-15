@@ -3,13 +3,18 @@ defmodule TDG.GeneratorController do
   alias TDG.Generator
   alias Poison, as: JSON
 
-  def generate(conn, %{"instructions"=>instructions}=params) do
-    instr = JSON.decode!(instructions)
+  alias TDG.{Repo, Session}
+
+  def generate(conn, %{"name"=>name}=params) do
+
+    session = Repo.get_by(Session, slug: name)
+
+    instr = JSON.decode!(session.content)
     processors = get_processors(instr)
 
     {:ok, c} = conn
     |> put_resp_content_type("text/csv")
-    |> put_resp_header("Content-Disposition", "attachment; filename=\"generated.csv\"")
+    |> put_resp_header("Content-Disposition", "attachment; filename=\"#{session.slug}.csv\"")
     |> send_chunked(200)
     |> chunk(get_headers(processors))
 

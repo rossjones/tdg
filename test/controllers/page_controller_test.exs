@@ -3,6 +3,6 @@ defmodule TDG.PageControllerTest do
 
   test "GET /", %{conn: conn} do
     conn = get conn, "/"
-    assert html_response(conn, 200) =~ "Instructions"
+    assert html_response(conn, 200) =~ "Generate"
   end
 end
